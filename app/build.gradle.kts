@@ -113,7 +113,11 @@ dependencies {
 //    РСЯ
     implementation(libs.mobileads)
 
+//    Lottie
+    implementation(libs.lottie.compose)
+
 //    Modules
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":lottie-store"))
 }
