@@ -39,6 +39,12 @@ jetbrainsKotlinJvm = "1.9.23"
 #РСЯ
 mobileads = "7.4.0"
 
+#Corner smoothing
+smoothCornerRectAndroidCompose = "v1.0.0"
+
+#Google fonts
+uiTextGoogleFonts = "1.7.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastorePreferences" }
@@ -95,6 +101,12 @@ mobileads = { group = "com.yandex.android", name = "mobileads", version.ref = "m
 
 #Lottie
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+
+#Corner smoothing
+smooth-corner-rect-android-compose = { module = "com.github.racra:smooth-corner-rect-android-compose", version.ref = "smoothCornerRectAndroidCompose" }
+
+#Google fonts
+androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

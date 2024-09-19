@@ -116,6 +116,12 @@ dependencies {
 //    Lottie
     implementation(libs.lottie.compose)
 
+//    Corner smoothing
+    implementation(libs.smooth.corner.rect.android.compose)
+
+//    Google fonts
+    implementation(libs.androidx.ui.text.google.fonts)
+
 //    Modules
     implementation(project(":data"))
     implementation(project(":domain"))
