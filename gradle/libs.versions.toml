@@ -1,7 +1,7 @@
 [versions]
 agp = "8.6.1"
 datastorePreferences = "1.1.1"
-kotlin = "1.9.23"
+kotlin = "2.0.20"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -34,7 +34,9 @@ atomicfu = "0.25.0"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-jetbrainsKotlinJvm = "1.9.23"
+
+#JVM
+jetbrainsKotlinJvm = "2.0.20"
 
 #РСЯ
 mobileads = "7.4.0"
@@ -113,4 +115,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
