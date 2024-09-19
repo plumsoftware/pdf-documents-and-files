@@ -1,4 +1,4 @@
-name: build apk
+name: build
 
 on:
   push:
@@ -23,6 +23,8 @@ jobs:
           distribution: zulu
           java-version: 21
           cache: gradle
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
       - name: Build gradle project
         run: ./gradlew app:build
       - name: Upload a Build Artifact
