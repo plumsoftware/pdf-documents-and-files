@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recent_button_content_desc">Недавно просмотренные</string>
+    <string name="recent_button">Недавние</string>
+</resources>

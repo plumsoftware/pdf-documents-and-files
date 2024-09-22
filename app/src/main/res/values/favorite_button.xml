@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="favorites_button_content_desc">Избранные файлы</string>
+    <string name="favorites_button">Избранное</string>
+</resources>
