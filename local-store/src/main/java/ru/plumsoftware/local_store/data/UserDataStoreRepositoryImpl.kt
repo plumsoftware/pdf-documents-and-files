@@ -1,4 +1,4 @@
-package ru.plumsoftware.local_store.user_data_store
+package ru.plumsoftware.local_store.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,6 +7,8 @@ import androidx.datastore.preferences.core.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import ru.plumsoftware.domain.model.User
+import ru.plumsoftware.local_store.domain.UserDataStoreRepository
+import ru.plumsoftware.local_store.user_data_store.Constants
 
 class UserDataStoreRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     UserDataStoreRepository {

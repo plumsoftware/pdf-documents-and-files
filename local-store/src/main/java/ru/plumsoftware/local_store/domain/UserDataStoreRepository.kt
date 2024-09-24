@@ -1,4 +1,4 @@
-package ru.plumsoftware.local_store.user_data_store
+package ru.plumsoftware.local_store.domain
 
 import kotlinx.coroutines.flow.Flow
 import ru.plumsoftware.domain.model.User
