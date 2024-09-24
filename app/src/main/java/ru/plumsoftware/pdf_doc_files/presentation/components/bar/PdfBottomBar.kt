@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.BottomBarButton
@@ -15,8 +16,8 @@ import ru.plumsoftware.pdf_doc_files.presentation.model.BottomBarButton
 
 @Composable
 fun PdfBottomBar(modifier: Modifier = Modifier) {
-    val selectedIndex by remember { mutableIntStateOf(0) }
-    val bottomBarButtons = arrayOf<BottomBarButton>(
+    var selectedIndex by remember { mutableIntStateOf(0) }
+    val bottomBarButtons = arrayOf(
         BottomBarButton.RecentButtonBottomBar,
         BottomBarButton.FavouritesButtonBottomBar,
         BottomBarButton.SettingsButtonBottomBar,
@@ -30,7 +31,9 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
     ) {
         bottomBarButtons.forEachIndexed { index, bottomBarButton ->
             BottomBarButton(
-                onClick = {},
+                onClick = {
+                    selectedIndex = index
+                },
                 bottomBarButton = bottomBarButton,
                 isSelected = selectedIndex == index
             )

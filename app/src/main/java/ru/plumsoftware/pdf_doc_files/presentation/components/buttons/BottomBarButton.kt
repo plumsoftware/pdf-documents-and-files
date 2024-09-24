@@ -25,7 +25,7 @@ import ru.plumsoftware.pdf_doc_files.presentation.theme.PdfTheme
 
 @Composable
 fun BottomBarButton(
-    onClick: () -> Unit,
+    onClick: (String) -> Unit,
     bottomBarButton: BottomBarButton,
     modifier: Modifier = Modifier,
     isSelected: Boolean = false
@@ -41,7 +41,9 @@ fun BottomBarButton(
     ) {
         IconButton(
             modifier = modifier,
-            onClick = onClick,
+            onClick = {
+                onClick.invoke(bottomBarButton.route)
+            },
             colors = IconButtonDefaults.iconButtonColors(
                 contentColor = contentColor,
                 containerColor = Color.Transparent
