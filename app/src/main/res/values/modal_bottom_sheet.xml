@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_title">Удалить</string>
+    <string name="favorite_title">В избранное</string>
+    <string name="brightness_title">Яркасть во время чтения</string>
+</resources>

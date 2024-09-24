@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_title">Delete</string>
+    <string name="favorite_title">In favorite</string>
+    <string name="brightness_title">Brightness by reading</string>
+</resources>
