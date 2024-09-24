@@ -1,7 +1,7 @@
 package ru.plumsoftware.pdf_doc_files.presentation.components.item
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -89,6 +89,7 @@ fun SettingsItem(selectedTheme: String, modifier: Modifier = Modifier) {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 @Preview(
     showBackground = true,
@@ -106,6 +107,7 @@ private fun SettingsItemPreviewDark() {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 @Preview(
     showBackground = true,
