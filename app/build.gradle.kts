@@ -108,9 +108,6 @@ dependencies {
 //    Splash screen
     implementation(libs.androidx.core.splashscreen)
 
-//    Mutex
-    implementation(libs.atomicfu)
-
 //    РСЯ
     implementation(libs.mobileads)
 

@@ -52,4 +52,10 @@ dependencies {
 //    Data store
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.datastore)
+
+//    Mutex
+    implementation(libs.atomicfu)
+
+//    Module
+    implementation(project(path = ":domain"))
 }
