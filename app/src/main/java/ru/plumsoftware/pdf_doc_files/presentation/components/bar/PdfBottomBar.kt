@@ -30,7 +30,8 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
     )
 
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .blur(radius = Blur.mediumBlur),
         shape = MaterialTheme.shapes.large,
         colors = CardDefaults.cardColors(
             containerColor = ExtendedTheme.extendedColorScheme.cardColor.colorContainer,
@@ -39,8 +40,7 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
     ) {
         Row(
             modifier = Modifier
-                .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding)
-                .blur(radius = Blur.mediumBlur),
+                .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
