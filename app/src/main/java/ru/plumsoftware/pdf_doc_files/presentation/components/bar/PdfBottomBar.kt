@@ -3,6 +3,9 @@ package ru.plumsoftware.pdf_doc_files.presentation.components.bar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -15,6 +18,7 @@ import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.BottomBarBu
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Blur
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Padding
 import ru.plumsoftware.pdf_doc_files.presentation.model.BottomBarButton
+import ru.plumsoftware.pdf_doc_files.presentation.theme.ExtendedTheme
 
 @Composable
 fun PdfBottomBar(modifier: Modifier = Modifier) {
@@ -25,21 +29,30 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
         BottomBarButton.SettingsButtonBottomBar,
     )
 
-    Row(
-        modifier = Modifier
-            .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding)
-            .blur(radius = Blur.mediumBlur),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+    Card(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
+            containerColor = ExtendedTheme.extendedColorScheme.cardColor.colorContainer,
+            contentColor = ExtendedTheme.extendedColorScheme.cardColor.onColorContainer
+        )
     ) {
-        bottomBarButtons.forEachIndexed { index, bottomBarButton ->
-            BottomBarButton(
-                onClick = {
-                    selectedIndex = index
-                },
-                bottomBarButton = bottomBarButton,
-                isSelected = selectedIndex == index
-            )
+        Row(
+            modifier = Modifier
+                .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding)
+                .blur(radius = Blur.mediumBlur),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            bottomBarButtons.forEachIndexed { index, bottomBarButton ->
+                BottomBarButton(
+                    onClick = {
+                        selectedIndex = index
+                    },
+                    bottomBarButton = bottomBarButton,
+                    isSelected = selectedIndex == index
+                )
+            }
         }
     }
 }

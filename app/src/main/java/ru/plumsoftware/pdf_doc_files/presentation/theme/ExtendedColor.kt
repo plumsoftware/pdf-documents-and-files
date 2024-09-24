@@ -10,6 +10,8 @@ val extendedBlue1Light = Color(0xFF002AC5)
 val onExtendedBlue1Light = Color(0xFFFFFFFF)
 val extendedBlue1ContainerLight = Color(0xFF3151FD)
 val onExtendedBlue1ContainerLight = Color(0xFFFFFFFF)
+val extendedCardColorLight = Color.White
+val extendedOnCardColorLight = Color.Black
 
 val extendedGreen1LightMediumContrast = Color(0xFF004E25)
 val onExtendedGreen1LightMediumContrast = Color(0xFFFFFFFF)
@@ -37,6 +39,8 @@ val extendedBlue1Dark = Color(0xFFBBC3FF)
 val onExtendedBlue1Dark = Color(0xFF001D93)
 val extendedBlue1ContainerDark = Color(0xFF2346F4)
 val onExtendedBlue1ContainerDark = Color(0xFFFFFFFF)
+val extendedCardColorDark = Color(0xFF2B2B2B)
+val extendedOnCardColorDark = Color.White
 
 val extendedGreen1DarkMediumContrast = Color(0xFF65E38E)
 val onExtendedGreen1DarkMediumContrast = Color(0xFF001B09)

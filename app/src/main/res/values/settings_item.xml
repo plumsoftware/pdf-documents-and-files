@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="theme_change">Тема</string>
+    <string name="theme_change_content_desc">Показать выподающий список</string>
+
+    <array name="themes">
+        <item>Светлая</item>
+        <item>Тёмная</item>
+        <item>Как в системе</item>
+    </array>
+</resources>

@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 data class ExtendedColorScheme(
     val extendedGreen1: ColorFamily,
     val extendedBlue1: ColorFamily,
+    val cardColor: ColorFamily
 )
 
 val extendedLight = ExtendedColorScheme(
@@ -28,6 +29,12 @@ val extendedLight = ExtendedColorScheme(
         extendedBlue1ContainerLight,
         onExtendedBlue1ContainerLight,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorLight,
+        onColorContainer = extendedOnCardColorLight,
+        onColor = extendedOnCardColorLight,
+        color = extendedCardColorLight
+    )
 )
 
 val extendedDark = ExtendedColorScheme(
@@ -43,6 +50,12 @@ val extendedDark = ExtendedColorScheme(
         extendedBlue1ContainerDark,
         onExtendedBlue1ContainerDark,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorDark,
+        onColorContainer = extendedOnCardColorDark,
+        onColor = extendedOnCardColorDark,
+        color = extendedCardColorDark
+    )
 )
 
 val extendedLightMediumContrast = ExtendedColorScheme(
@@ -58,6 +71,12 @@ val extendedLightMediumContrast = ExtendedColorScheme(
         extendedBlue1ContainerLightMediumContrast,
         onExtendedBlue1ContainerLightMediumContrast,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorLight,
+        onColorContainer = extendedOnCardColorLight,
+        onColor = extendedOnCardColorLight,
+        color = extendedCardColorLight
+    )
 )
 
 val extendedLightHighContrast = ExtendedColorScheme(
@@ -73,6 +92,12 @@ val extendedLightHighContrast = ExtendedColorScheme(
         extendedBlue1ContainerLightHighContrast,
         onExtendedBlue1ContainerLightHighContrast,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorLight,
+        onColorContainer = extendedOnCardColorLight,
+        onColor = extendedOnCardColorLight,
+        color = extendedCardColorLight
+    )
 )
 
 val extendedDarkMediumContrast = ExtendedColorScheme(
@@ -88,6 +113,12 @@ val extendedDarkMediumContrast = ExtendedColorScheme(
         extendedBlue1ContainerDarkMediumContrast,
         onExtendedBlue1ContainerDarkMediumContrast,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorDark,
+        onColorContainer = extendedOnCardColorDark,
+        onColor = extendedOnCardColorDark,
+        color = extendedCardColorDark
+    )
 )
 
 val extendedDarkHighContrast = ExtendedColorScheme(
@@ -103,6 +134,12 @@ val extendedDarkHighContrast = ExtendedColorScheme(
         extendedBlue1ContainerDarkHighContrast,
         onExtendedBlue1ContainerDarkHighContrast,
     ),
+    cardColor = ColorFamily(
+        colorContainer = extendedCardColorDark,
+        onColorContainer = extendedOnCardColorDark,
+        onColor = extendedOnCardColorDark,
+        color = extendedCardColorDark
+    )
 )
 
 @Immutable
@@ -124,7 +161,8 @@ val unspecified_scheme = ColorFamily(
 val LocalExtendedColors = staticCompositionLocalOf {
     ExtendedColorScheme(
         extendedGreen1 = unspecified_scheme,
-        extendedBlue1 = unspecified_scheme
+        extendedBlue1 = unspecified_scheme,
+        cardColor = unspecified_scheme
     )
 }
 
