@@ -10,7 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.BottomBarButton
+import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Blur
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Padding
 import ru.plumsoftware.pdf_doc_files.presentation.model.BottomBarButton
 
@@ -25,7 +27,8 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
 
     Row(
         modifier = Modifier
-            .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding),
+            .padding(horizontal = Padding.largePadding, vertical = Padding.mediumPadding)
+            .blur(radius = Blur.mediumBlur),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
