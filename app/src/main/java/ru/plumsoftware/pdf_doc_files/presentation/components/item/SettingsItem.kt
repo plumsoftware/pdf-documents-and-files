@@ -35,7 +35,7 @@ import ru.plumsoftware.pdf_doc_files.presentation.theme.ExtendedTheme
 import ru.plumsoftware.pdf_doc_files.presentation.theme.PdfTheme
 
 @Composable
-fun SettingsItem(modifier: Modifier = Modifier, selectedTheme: String) {
+fun SettingsItem(selectedTheme: String, modifier: Modifier = Modifier) {
 
     var isExpanded by remember { mutableStateOf(false) }
 
