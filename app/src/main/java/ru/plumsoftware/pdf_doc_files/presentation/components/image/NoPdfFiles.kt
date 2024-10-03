@@ -25,10 +25,8 @@ fun NoPdfFiles(@RawRes lottieRes: Int, modifier: Modifier = Modifier) {
     )
 
     LottieAnimation(
+        isPlaying = true,
         composition = preloaderLottieComposition,
-        progress = {
-            0.5f
-        },
         modifier = modifier
     )
 }
