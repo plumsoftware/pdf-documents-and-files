@@ -124,4 +124,5 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":lottie-store"))
+    implementation(project(":local-store"))
 }
