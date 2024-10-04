@@ -21,6 +21,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import org.koin.androidx.compose.koinViewModel
 import ru.plumsoftware.lottie_store.LottieRes
+import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfBottomBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfTopBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.PrimaryButton
 import ru.plumsoftware.pdf_doc_files.presentation.components.image.NoPdfFiles
@@ -52,12 +53,12 @@ fun RecentScreen(navHostController: NavHostController) {
     val contentResolver = LocalContext.current.contentResolver
     val state =
         recentViewModel.recentState.collectAsState(initial = RecentState(contentResolver = contentResolver))
-    RecentScreenContent(state = state, onRecentIntent = recentViewModel::onRecentIntent)
+    RecentScreenContent(state = state, navHostController = navHostController, onRecentIntent = recentViewModel::onRecentIntent)
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-private fun RecentScreenContent(state: State<RecentState>, onRecentIntent: (RecentIntent) -> Unit) {
+private fun RecentScreenContent(state: State<RecentState>, navHostController: NavHostController, onRecentIntent: (RecentIntent) -> Unit) {
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -71,6 +72,9 @@ private fun RecentScreenContent(state: State<RecentState>, onRecentIntent: (Rece
     }
 
     Scaffold(
+        bottomBar = {
+            PdfBottomBar(modifier = Modifier.fillMaxWidth(), navHost = navHostController)
+        },
         floatingActionButton = {
             PrimaryButton(onClick = {
                 val intent = Intent(Intent.ACTION_GET_CONTENT).apply {

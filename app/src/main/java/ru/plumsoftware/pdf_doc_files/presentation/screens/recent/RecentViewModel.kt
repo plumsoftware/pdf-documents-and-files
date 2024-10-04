@@ -51,7 +51,7 @@ class RecentViewModel(
                     val size = getFileSize(uri = intent.uri)
                     val pair = getPdfInfo(uri = intent.uri)
 
-                    Log.d("TAG", "size: ${size}, page count: ${pair.first}, bitmap: ${pair.second}")
+                    Log.d("TAG", "size: ${size}, page count: ${pair.first}, bitmap: ${pair.second}, uri ${intent.uri}")
                 }
             }
         }
