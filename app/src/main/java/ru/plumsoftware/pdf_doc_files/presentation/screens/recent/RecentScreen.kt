@@ -3,15 +3,11 @@ package ru.plumsoftware.pdf_doc_files.presentation.screens.recent
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Scaffold
@@ -21,18 +17,14 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import org.koin.androidx.compose.koinViewModel
 import ru.plumsoftware.lottie_store.LottieRes
-import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfBottomBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfTopBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.PrimaryButton
 import ru.plumsoftware.pdf_doc_files.presentation.components.image.NoPdfFiles
 import ru.plumsoftware.pdf_doc_files.presentation.components.item.PdfDocItem
-import ru.plumsoftware.pdf_doc_files.presentation.components.wrapper.TopAppBarWrapper
-import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Blur
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Space
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.store.RecentIntent
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.store.RecentLabel
@@ -57,7 +49,9 @@ fun RecentScreen(navHostController: NavHostController) {
         recentViewModel.onRecentIntent(RecentIntent.InitRecentFiles)
     }
 
-    val state = recentViewModel.recentState.collectAsState()
+    val contentResolver = LocalContext.current.contentResolver
+    val state =
+        recentViewModel.recentState.collectAsState(initial = RecentState(contentResolver = contentResolver))
     RecentScreenContent(state = state, onRecentIntent = recentViewModel::onRecentIntent)
 }
 
@@ -71,7 +65,7 @@ private fun RecentScreenContent(state: State<RecentState>, onRecentIntent: (Rece
         if (result.resultCode == Activity.RESULT_OK) {
             val data = result.data
             if (data != null && data.data != null) {
-                println(data.data)
+                onRecentIntent(RecentIntent.AddToRecent(uri = data.data!!))
             }
         }
     }
@@ -90,9 +84,6 @@ private fun RecentScreenContent(state: State<RecentState>, onRecentIntent: (Rece
         topBar = {
             PdfTopBar(onSearch = {}, onFilter = {})
         },
-        bottomBar = {
-            PdfBottomBar(modifier = Modifier.fillMaxWidth())
-        }
     ) { innerPadding ->
 
         if (state.value.files.isEmpty()) {
@@ -122,6 +113,5 @@ private fun RecentScreenContent(state: State<RecentState>, onRecentIntent: (Rece
                     )
                 }
             }
-
     }
 }

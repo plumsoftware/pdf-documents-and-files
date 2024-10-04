@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.BottomBarButton
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Blur
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Padding
@@ -32,7 +32,7 @@ import ru.plumsoftware.pdf_doc_files.presentation.model.BottomBarButton
 import ru.plumsoftware.pdf_doc_files.presentation.theme.ExtendedTheme
 
 @Composable
-fun PdfBottomBar(modifier: Modifier = Modifier) {
+fun PdfBottomBar(navHost: NavHostController, modifier: Modifier = Modifier) {
     var selectedIndex by remember { mutableIntStateOf(0) }
     val bottomBarButtons = arrayOf(
         BottomBarButton.RecentButtonBottomBar,
@@ -85,6 +85,7 @@ fun PdfBottomBar(modifier: Modifier = Modifier) {
                     BottomBarButton(
                         onClick = {
                             selectedIndex = index
+                            navHost.navigate(route = bottomBarButton.route)
                         },
                         bottomBarButton = bottomBarButton,
                         isSelected = selectedIndex == index

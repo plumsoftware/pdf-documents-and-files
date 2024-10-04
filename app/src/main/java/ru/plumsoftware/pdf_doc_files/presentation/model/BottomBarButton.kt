@@ -19,20 +19,20 @@ sealed class BottomBarButton(
         title = R.string.recent_button,
         imageVector = PdfViewerIconPack.Recent,
         imageButtonContentDesc = R.string.recent_button_content_desc,
-        route = Routing.RECENT
+        route = Routing.RECENT_ROOT
     )
 
     data object FavouritesButtonBottomBar : BottomBarButton(
         title = R.string.favorites_button,
         imageVector = PdfViewerIconPack.Favorite,
         imageButtonContentDesc = R.string.favorites_button_content_desc,
-        route = Routing.FAVORITES
+        route = Routing.FAVORITES_ROOT
     )
 
     data object SettingsButtonBottomBar : BottomBarButton(
         title = R.string.settings_button,
         imageVector = PdfViewerIconPack.Settings,
         imageButtonContentDesc = R.string.settings_button_content_desc,
-        route = Routing.SETTINGS
+        route = Routing.SETTINGS_ROOT
     )
 }

@@ -6,11 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfBottomBar
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.RecentScreen
 import ru.plumsoftware.pdf_doc_files.presentation.theme.ExtendedTheme
 import ru.plumsoftware.pdf_doc_files.presentation.theme.PdfTheme
@@ -24,12 +27,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             ExtendedTheme {
                 PdfTheme {
-                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                        val navHost = rememberNavController()
+                    val navHost = rememberNavController()
 
-                        NavHost(navController = navHost, startDestination = Routing.RECENT) {
-                            composable(route = Routing.RECENT) {
-                                RecentScreen(navHostController = navHost)
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        bottomBar = {
+                            PdfBottomBar(modifier = Modifier.fillMaxWidth(), navHost = navHost)
+                        }) { innerPadding ->
+
+                        NavHost(navController = navHost, startDestination = Routing.RECENT_ROOT) {
+                            navigation(route = Routing.RECENT_ROOT, startDestination = Routing.RECENT) {
+                                composable(route = Routing.RECENT) {
+                                    RecentScreen(navHostController = navHost)
+                                }
                             }
                         }
                     }

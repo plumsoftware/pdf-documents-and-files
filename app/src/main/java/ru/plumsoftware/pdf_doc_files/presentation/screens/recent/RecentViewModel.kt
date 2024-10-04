@@ -1,5 +1,11 @@
 package ru.plumsoftware.pdf_doc_files.presentation.screens.recent
 
+import android.annotation.SuppressLint
+import android.content.ContentResolver
+import android.graphics.Bitmap
+import android.graphics.pdf.PdfRenderer
+import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.SupervisorJob
@@ -12,6 +18,7 @@ import ru.plumsoftware.local_store.LocalStoreStorage
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.store.RecentIntent
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.store.RecentLabel
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.store.RecentState
+import java.io.File
 
 class RecentViewModel(
     private val localStoreStorage: LocalStoreStorage
@@ -37,7 +44,53 @@ class RecentViewModel(
                     recentLabel.emit(RecentLabel.OnFileClick)
                 }
             }
+
+            is RecentIntent.AddToRecent -> {
+                viewModelScope.launch(context = supervisorCoroutineContext) {
+
+                    val size = getFileSize(uri = intent.uri)
+                    val pair = getPdfInfo(uri = intent.uri)
+
+                    Log.d("TAG", "size: ${size}, page count: ${pair.first}, bitmap: ${pair.second}")
+                }
+            }
         }
+    }
+
+    @SuppressLint("Recycle")
+    private fun getFileSize(uri: Uri): Long {
+        if (recentState.value.contentResolver != null) {
+            val contentResolver: ContentResolver = recentState.value.contentResolver!!
+            val fileDescriptor = contentResolver.openFileDescriptor(uri, "r")
+            val file = File(fileDescriptor?.fileDescriptor?.toString() ?: "")
+            return file.length()
+        } else
+            return 0L
+    }
+
+    private fun getPdfInfo(uri: Uri): Pair<Int, Bitmap?> {
+        var pageCount = 0
+        var cover: Bitmap? = null
+
+        if (recentState.value.contentResolver != null) {
+            val parcelFileDescriptor = recentState.value.contentResolver!!.openFileDescriptor(uri, "r")
+            if (parcelFileDescriptor != null) {
+                val pdfRenderer = PdfRenderer(parcelFileDescriptor)
+                pageCount = pdfRenderer.pageCount
+
+                if (pageCount > 0) {
+                    val page = pdfRenderer.openPage(0)
+                    cover = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
+                    page.render(cover, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
+                    page.close()
+                }
+
+                pdfRenderer.close()
+                parcelFileDescriptor.close()
+            }
+            return Pair(pageCount, cover)
+        } else
+            return Pair(pageCount, cover)
     }
 
     private suspend inline fun getFiles() =

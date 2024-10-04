@@ -120,6 +120,9 @@ dependencies {
 //    Google fonts
     implementation(libs.androidx.ui.text.google.fonts)
 
+//    PDF
+    implementation(libs.pdfbox)
+
 //    Modules
     implementation(project(":data"))
     implementation(project(":domain"))
