@@ -2,6 +2,7 @@ package ru.plumsoftware.pdf_doc_files.presentation.components.item
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,10 +19,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import ru.plumsoftware.domain.model.PdfDocumentModel
+import ru.plumsoftware.pdf_doc_files.presentation.model.PdfDocumentModel
 import ru.plumsoftware.pdf_doc_files.R
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.MoreButton
 import ru.plumsoftware.pdf_doc_files.presentation.dimensions.Alpha
@@ -38,6 +39,11 @@ fun PdfDocItem(
     onMoreClick: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val bitmap = BitmapFactory.decodeByteArray(
+        pdfDocumentModel.pdfDocumentCover ?: byteArrayOf(),
+        0,
+        pdfDocumentModel.pdfDocumentCover!!.size
+    ).asImageBitmap()
     ExtendedTheme {
         Button(
             shape = MaterialTheme.shapes.large,
@@ -63,7 +69,7 @@ fun PdfDocItem(
                 )
             ) {
                 Image(
-                    painter = painterResource(id = pdfDocumentModel.imageResId ?: 0),
+                    bitmap = bitmap,
                     contentDescription = stringResource(id = R.string.pdf_doc_image),
                     modifier = Modifier.size(size = Size.PDfDocCover.size)
                 )
@@ -79,7 +85,7 @@ fun PdfDocItem(
                         .padding(horizontal = Padding.smallPadding)
                 ) {
                     Text(
-                        text = pdfDocumentModel.title ?: "",
+                        text = pdfDocumentModel.name ?: "",
                         style = MaterialTheme.typography.titleMedium
                     )
                     Text(

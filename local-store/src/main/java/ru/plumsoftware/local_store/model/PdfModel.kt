@@ -7,11 +7,7 @@ import ru.plumsoftware.local_store.dao.Constants
 @Entity(tableName = Constants.pdfDocsTable)
 data class PdfModel(
     @PrimaryKey val id: Int,
-    val imageUri: String?,
-    val imageResId: Int?,
-    val title: String?,
-    val memoryValue: Float?,
+    val documentUri: String?,
     val isFavorite: Boolean = false,
     val lastOpenDate: Long,
-    val pageCount: Int
 )
