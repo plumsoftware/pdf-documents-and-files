@@ -3,6 +3,7 @@ package ru.plumsoftware.pdf_doc_files.presentation.screens.favorite
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import org.koin.androidx.compose.koinViewModel
 import ru.plumsoftware.lottie_store.LottieRes
+import ru.plumsoftware.pdf_doc_files.Routing
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfBottomBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfTopBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.image.NoPdfFiles
@@ -33,6 +35,9 @@ fun FavoriteScreen(navHostController: NavHostController) {
         viewModel.favoriteEffect.collect { effect ->
             when (effect) {
                 FavoriteEffect.OnFileClick -> {}
+                FavoriteEffect.OnSearchClick -> {
+                    navHostController.navigate(route = Routing.SEARCH_F)
+                }
             }
         }
     }
@@ -42,23 +47,41 @@ fun FavoriteScreen(navHostController: NavHostController) {
     }
 
     val state = viewModel.favoriteState.collectAsState()
-    RecentScreenContent(state = state, navHostController = navHostController, onFavoriteEvent = viewModel::onFavoriteEvent)
+    FavoriteScreenContent(
+        state = state,
+        navHostController = navHostController,
+        onFavoriteEvent = viewModel::onFavoriteEvent
+    )
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-private fun RecentScreenContent(state: State<FavoriteState>, navHostController: NavHostController, onFavoriteEvent: (FavoriteEvent) -> Unit) {
+private fun FavoriteScreenContent(
+    state: State<FavoriteState>,
+    navHostController: NavHostController,
+    onFavoriteEvent: (FavoriteEvent) -> Unit
+) {
     Scaffold(
         bottomBar = {
-            PdfBottomBar(modifier = Modifier.fillMaxWidth(), navHost = navHostController, selectedIndex = 1)
+            PdfBottomBar(
+                modifier = Modifier.fillMaxWidth(),
+                navHost = navHostController,
+                selectedIndex = 1
+            )
         },
         topBar = {
-            PdfTopBar(onSearch = {}, onFilter = {})
+            PdfTopBar(
+                onSearch = {},
+                onFilter = {
+                    onFavoriteEvent(FavoriteEvent.OnSearchClick)
+                }
+            )
         },
     ) { innerPadding ->
 
         if (state.value.files.isEmpty()) {
             Column(
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

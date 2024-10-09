@@ -14,6 +14,7 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import ru.plumsoftware.pdf_doc_files.presentation.screens.favorite.FavoriteScreen
 import ru.plumsoftware.pdf_doc_files.presentation.screens.recent.RecentScreen
+import ru.plumsoftware.pdf_doc_files.presentation.screens.search.SearchScreen
 import ru.plumsoftware.pdf_doc_files.presentation.theme.ExtendedTheme
 import ru.plumsoftware.pdf_doc_files.presentation.theme.PdfTheme
 
@@ -37,10 +38,16 @@ class MainActivity : ComponentActivity() {
                                 composable(route = Routing.RECENT) {
                                     RecentScreen(navHostController = navHost)
                                 }
+                                composable(route = Routing.SEARCH_R) {
+                                    SearchScreen()
+                                }
                             }
                             navigation(route = Routing.FAVORITES_ROOT, startDestination = Routing.FAVORITE) {
                                 composable(route = Routing.FAVORITE) {
                                     FavoriteScreen(navHostController = navHost)
+                                }
+                                composable(route = Routing.SEARCH_F) {
+                                    SearchScreen()
                                 }
                             }
                         }

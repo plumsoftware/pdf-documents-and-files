@@ -6,5 +6,8 @@ object Routing {
     const val SETTINGS_ROOT = "settings_root"
 
     const val RECENT = "recent"
+    const val SEARCH_R = "search_r"
+
     const val FAVORITE = "favorites"
+    const val SEARCH_F = "search_f"
 }

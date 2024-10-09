@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -21,6 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import org.koin.androidx.compose.koinViewModel
 import ru.plumsoftware.lottie_store.LottieRes
+import ru.plumsoftware.pdf_doc_files.Routing
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfBottomBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.bar.PdfTopBar
 import ru.plumsoftware.pdf_doc_files.presentation.components.buttons.PrimaryButton
@@ -42,6 +44,10 @@ fun RecentScreen(navHostController: NavHostController) {
                 RecentLabel.OnFileClick -> {
 
                 }
+
+                RecentLabel.OnSearchClick -> {
+                    navHostController.navigate(route = Routing.SEARCH_R)
+                }
             }
         }
     }
@@ -53,12 +59,20 @@ fun RecentScreen(navHostController: NavHostController) {
     val contentResolver = LocalContext.current.contentResolver
     val state =
         recentViewModel.recentState.collectAsState(initial = RecentState(contentResolver = contentResolver))
-    RecentScreenContent(state = state, navHostController = navHostController, onRecentIntent = recentViewModel::onRecentIntent)
+    RecentScreenContent(
+        state = state,
+        navHostController = navHostController,
+        onRecentIntent = recentViewModel::onRecentIntent
+    )
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-private fun RecentScreenContent(state: State<RecentState>, navHostController: NavHostController, onRecentIntent: (RecentIntent) -> Unit) {
+private fun RecentScreenContent(
+    state: State<RecentState>,
+    navHostController: NavHostController,
+    onRecentIntent: (RecentIntent) -> Unit
+) {
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -73,7 +87,11 @@ private fun RecentScreenContent(state: State<RecentState>, navHostController: Na
 
     Scaffold(
         bottomBar = {
-            PdfBottomBar(modifier = Modifier.fillMaxWidth(), navHost = navHostController, selectedIndex = 0)
+            PdfBottomBar(
+                modifier = Modifier.fillMaxWidth(),
+                navHost = navHostController,
+                selectedIndex = 0
+            )
         },
         floatingActionButton = {
             PrimaryButton(onClick = {
@@ -86,12 +104,17 @@ private fun RecentScreenContent(state: State<RecentState>, navHostController: Na
             })
         },
         topBar = {
-            PdfTopBar(onSearch = {}, onFilter = {})
+            PdfTopBar(
+                onSearch = {
+                    onRecentIntent(RecentIntent.OnSearchClick)
+                },
+                onFilter = {}
+            )
         },
     ) { innerPadding ->
-
         if (state.value.files.isEmpty()) {
             Column(
+                modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

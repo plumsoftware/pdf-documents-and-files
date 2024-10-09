@@ -6,4 +6,5 @@ sealed class RecentIntent {
     data object InitRecentFiles : RecentIntent()
     data object OnFileClick : RecentIntent()
     data class AddToRecent(val uri: Uri) : RecentIntent()
+    data object OnSearchClick : RecentIntent()
 }

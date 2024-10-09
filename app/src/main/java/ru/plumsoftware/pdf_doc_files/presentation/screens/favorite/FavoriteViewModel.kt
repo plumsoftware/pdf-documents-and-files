@@ -41,6 +41,12 @@ class FavoriteViewModel(
                     favoriteEffect.emit(FavoriteEffect.OnFileClick)
                 }
             }
+
+            FavoriteEvent.OnSearchClick -> {
+                viewModelScope.launch {
+                    favoriteEffect.emit(FavoriteEffect.OnSearchClick)
+                }
+            }
         }
     }
 

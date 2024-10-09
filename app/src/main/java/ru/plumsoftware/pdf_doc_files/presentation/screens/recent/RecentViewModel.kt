@@ -52,6 +52,12 @@ class RecentViewModel(
                     Log.d("TAG", "pdfDocument: $pdfDocument")
                 }
             }
+
+            RecentIntent.OnSearchClick -> {
+                viewModelScope.launch {
+                    recentLabel.emit(RecentLabel.OnSearchClick)
+                }
+            }
         }
     }
 
