@@ -78,7 +78,6 @@ private fun FavoriteScreenContent(
             )
         },
     ) { innerPadding ->
-
         if (state.value.files.isEmpty()) {
             Column(
                 modifier = Modifier.fillMaxSize(),
@@ -97,7 +96,7 @@ private fun FavoriteScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                itemsIndexed(state.value.files) { index, item ->
+                itemsIndexed(state.value.files) { _, item ->
                     PdfDocItem(
                         pdfDocumentModel = item,
                         onClick = {

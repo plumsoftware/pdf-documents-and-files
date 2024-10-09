@@ -4,13 +4,14 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.itextpdf.kernel.pdf.PdfDocument
-import com.itextpdf.kernel.pdf.PdfReader
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.apache.pdfbox.Loader
+import org.apache.pdfbox.pdmodel.PDDocument
+import org.apache.pdfbox.pdmodel.PDPageContentStream
 import ru.plumsoftware.pdf_doc_files.presentation.model.PdfDocumentModel
 import ru.plumsoftware.local_store.LocalStoreStorage
 import ru.plumsoftware.data.model.PdfInfoDTO
@@ -79,25 +80,19 @@ class RecentViewModel(
     }
 
     private fun getPdfInfo(uri: Uri): PdfInfoDTO {
-        val pdfFile = File(uri.path!!)
+        val file = File(uri.path)
+        val pdfDocument: PDDocument = Loader.loadPDF(file)
 
-        if (pdfFile.exists()) {
-            val reader = PdfReader(pdfFile)
-            val pdfDocument = PdfDocument(reader)
+        val name = pdfDocument.documentInformation.title
+        val pages = pdfDocument.numberOfPages
+        val size = file.length() / 1024
 
-            val pages = pdfDocument.numberOfPages
-            val name = pdfFile.name
-            val size = pdfFile.length() / 1024.toLong()
-            val firstPage = pdfDocument.firstPage.contentBytes
 
-            return PdfInfoDTO(
-                fileName = name,
-                pageCount = pages,
-                fileSize = size,
-                coverImage = firstPage
-            )
-        } else {
-            return PdfInfoDTO.empty()
-        }
+        return PdfInfoDTO(
+            fileName = name,
+            pageCount = pages,
+            fileSize = size,
+            coverImage = null
+        )
     }
 }

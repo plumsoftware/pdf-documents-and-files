@@ -75,15 +75,13 @@ private fun RecentScreenContent(
 ) {
 
     val launcher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data
-            if (data != null && data.data != null) {
-                onRecentIntent(RecentIntent.AddToRecent(uri = data.data!!))
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                onRecentIntent(RecentIntent.AddToRecent(uri = result.data?.data!!))
             }
         }
-    }
+    )
 
     Scaffold(
         bottomBar = {
@@ -98,7 +96,6 @@ private fun RecentScreenContent(
                 val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
                     type = "application/pdf"
                     addCategory(Intent.CATEGORY_OPENABLE)
-                    putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
                 }
                 launcher.launch(intent)
             })

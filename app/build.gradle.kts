@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.plumsoftware.pdf_doc_files"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -43,6 +43,21 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+
+    android {
+        packagingOptions {
+            exclude("META-INF/DEPENDENCIES")
+            exclude("META-INF/LICENSE")
+            exclude("META-INF/LICENSE.txt")
+            exclude("META-INF/license.txt")
+            exclude("META-INF/NOTICE")
+            exclude("META-INF/NOTICE.txt")
+            exclude("META-INF/notice.txt")
+            exclude("META-INF/ASL2.0")
+            exclude("META-INF/*.kotlin_module")
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -121,7 +136,8 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
 
 //    PDF
-    implementation(libs.itextg)
+//    implementation(libs.itextg)
+    implementation(libs.pdfbox)
 
 //    Modules
     implementation(project(":data"))
